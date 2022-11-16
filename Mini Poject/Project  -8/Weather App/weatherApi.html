@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.gmap_canvas{
+display: flex;
+justify-content: flex-end;
+}
+#weatherdetails{
+    display: flex;
+    justify-content: space-between;
+}
+#sevendaysdata{
+    display: grid;
+    grid-template-rows: repeat(1, auto);
+    grid-template-columns: repeat(8, auto);
+    gap: 20px;
+}
+#sevendaysdata>div{
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: rgb(90, 84, 84);
+    border-radius: 10px;
+}
+#sevendaysdata>div>img{
+    height: 50px;
+    width: 30%;
+}
+#sevendaysdata>div>p{
+    color: white;
+    font-weight: bolder;
+    
+}
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <input id="cityname" placeholder="Enter the city name"/>
+    <button id="search">Search weather</button>
+    <div id="weatherdetails">
+
+        <div id="container">
+
+        </div>
+    
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe 
+                width="1000" 
+                height="500" 
+                id="gmap_canvas" 
+                frameborder="0" 
+                scrolling="no" 
+                marginheight="0" 
+                marginwidth="0">
+            </iframe>
+            </div>
+        </div>
+
+    </div>
+    <div id="sevendaysdata">
+       
+
+    </div>
+
+   
+</body>
+</html>
+<script src="weatherapi.js"></script>
