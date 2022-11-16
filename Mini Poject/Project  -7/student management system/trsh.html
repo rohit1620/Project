@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash Student</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .header{
+        border: 2px solid;
+        display: flex;
+        justify-content: space-around;
+        background-color: black;
+        color: white;
+    }
+    table{
+        width: 95%;
+        margin: auto;
+    }
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+    }
+    tr:first-child{
+        background-color: green;
+        font-size: 30px;
+        color: black;
+    }
+    a{
+        font-size: 30px;
+        color: blue;
+    }
+    </style>
+</head>
+<body>
+    <nav class="header">
+        <div><h3>Batch-1 <span id="batch-1"></span></h3></div>
+        <div><h3>Batch-2 <span id="batch-2"></span></h3></div>
+        <div><h3>Batch-3 <span id="batch-3"></span></h3></div>
+        <div><h3>Batch-4 <span id="batch-4"></span></h3></div>
+        <div><h3>Batch-5 <span id="batch-5"></span></h3></div>
+     </nav>
+     <nav class="header">
+        <div><h3><a href="index.html">student data</a></h3></div>
+        <div><h3><a href="list.html">Student List</a></h3></div>
+        <div><h3><a href="trsh.html">Trash students</a></h3></div>
+     </nav>
+
+     <table>
+        <tr>
+            <th>S.NO</th>
+            <th>Name</th>
+            <th>course</th>
+            <th>unit</th>
+            <th>image</th>
+            <th>batch</th>
+            <th>Delete</th>
+        </tr>
+        
+    </table>
+</body>
+</html>
+<script>
+
+var bookmarks=JSON.parse(localStorage.getItem("bookmarks"))
+    console.log(bookmarks)
+    
+    displaystudentsdata(bookmarks)
+
+    function displaystudentsdata(data){
+        data.forEach(function(ele,index){
+            var tr=document.createElement("tr")
+
+            var td0=document.createElement("td")
+            var td1=document.createElement("td")
+            var td2=document.createElement("td")
+            var td3=document.createElement("td")
+            var td4=document.createElement("td")
+            var td5=document.createElement("td")
+            var td6=document.createElement("td")
+            td6.innerText="delete";
+            td6.style.cursor="pointer"
+            td6.style.color="blue"
+            // td5.style.fontWeight="bold"
+            td6.addEventListener("click",function(){
+            delfun(ele,index)
+            })
+            var imgtd4=document.createElement("img")
+            imgtd4.setAttribute("src",ele.image)
+            imgtd4.style.width="70px"
+            imgtd4.style.height="70px"
+            td4.append(imgtd4)
+            td0.innerText=index+1;
+            td1.innerText=ele.name;
+            td2.innerText=ele.course;
+            td3.innerText=ele.unit
+            // td4.innerText=ele.image;
+            td5.innerText=ele.Batch
+
+            // console.log(td1,td2,td3,td4,td5,td6)
+            tr.append(td0,td1,td2,td3,td4,td5,td6)
+            document.querySelector("table").append(tr)
+        })
+    }
+
+    function delfun(ele,index){
+        bookmarks.splice(index,1)
+        localStorage.setItem("bookmarks",JSON.stringify(bookmarks))
+        console.log(bookmarks);
+        window.location.reload();
+    }
+</script>

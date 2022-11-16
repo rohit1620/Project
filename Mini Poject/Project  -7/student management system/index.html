@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <nav class="header">
+       <div><h3>Batch01- <span id="batch-1"></span></h3></div>
+       <div><h3>Batch02- <span id="batch-2"></span></h3></div>
+       <div><h3>Batch03- <span id="batch-3"></span></h3></div>
+       <div><h3>Batch04- <span id="batch-4"></span></h3></div>
+       <div><h3>Batch05- <span id="batch-5"></span></h3></div>
+    </nav>
+    <nav class="list">
+       <div><h3><a href="list.html">Student List</a></h3></div>
+       
+    </nav>
+
+    <form id="form">
+        <h2>Enter Your Students data</h2>
+        <input placeholder="Enter Name" id="name" type="text" />
+        <select id="course">
+            <option value="">select course</option>
+            <option value="FSD">FSD</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Software devloper">Software devloper</option>
+        </select>
+
+        <select name="unit" id="unit">
+            <option value="">select unit</option>
+            <option value="uint-1">unit-1</option>
+            <option value="unit-2">unit-2</option>
+            <option value="unit-3">unit-3</option>
+            <option value="unit-3">unit-4</option>
+            <option value="unit-5">unit-5</option>
+        </select>
+        <input type="url" name="url" id="img" placeholder="img url" id="img">
+        <select name="batch" id="batch">
+            <option selected value="">select batch</option>
+            <option value="batch-1">batch-1</option>
+            <option value="batch-2">batch-2</option>
+            <option value="batch-3">batch-3</option>
+            <option value="batch-4">batch-4</option>
+            <option value="batch-5">batch-5</option>
+        </select>
+        <input id="submit" type="submit" value="Submit" />
+    </form>
+
+</body>
+</html>
+<script>
+
+
+let students=JSON.parse(localStorage.getItem("studentdata"))||[];
+
+// let array=JSON.parse(localStorage.getItem("batch_id"))||[]
+
+let b1=JSON.parse(localStorage.getItem("batch1"))||0;
+let b2=JSON.parse(localStorage.getItem("batch2"))||0;
+let b3=JSON.parse(localStorage.getItem("batch3"))||0;
+let b4=JSON.parse(localStorage.getItem("batch4"))||0;
+let b5=JSON.parse(localStorage.getItem("batch5"))||0;
+displaystudents()
+
+document.querySelector("#form").addEventListener("submit",student_collection_data_fun)
+    function student_collection_data_fun(){
+        event.preventDefault()
+    
+
+        function studentdata(name,course,unit, imgurl,batch){
+            this.name=name;
+            this.course=course;
+            this.unit=unit;
+            this.image=imgurl;
+            this.Batch=batch;
+        }
+        let name=form.name.value;
+        let course=form.course.value;
+        let unit=form.unit.value;
+        let imgurl=form.img.value;
+        let batch=form.batch.value;
+
+        p1=new studentdata(name,course,unit, imgurl,batch);
+
+        form.name.value=null;
+        form.course.value="";
+        form.unit.value="";
+        form.img.value=null;
+        form.batch.value='';
+        
+        students.push(p1)
+        
+        localStorage.setItem("studentdata",JSON.stringify(students))
+
+        batchinfo(p1)
+    }
+
+    function  batchinfo(data){
+        var p1_id=data.Batch;
+        // console.log(p1_id)
+        let id1 = "batch-1";id2 = "batch-2";id3 = "batch-3";id4 = "batch-4";id5 = "batch-5";
+        
+            if(id1==p1_id){
+                console.log('id1')
+                b1++;
+                localStorage.setItem("batch1",JSON.stringify(b1))
+            }
+            if(id2==p1_id){
+                // console.log('id2')
+                b2++;
+                localStorage.setItem("batch2",JSON.stringify(b2))
+            }
+            if(id3==p1_id){
+                // console.log('id3')
+                b3++;
+                localStorage.setItem("batch3",JSON.stringify(b3))
+            }
+            if(id4==p1_id){
+                console.log('id4')
+                b4++;
+                localStorage.setItem("batch4",JSON.stringify(b4))
+            
+            }
+            if(id5==p1_id){
+                console.log('id5')
+                b5++;
+                localStorage.setItem("batch5",JSON.stringify(b5))
+            
+            }
+            displaystudents()
+        
+        }
+    //    localStorage.clear();
+    function displaystudents(){
+        document.querySelector("#batch-1").innerHTML=b1;
+        document.querySelector("#batch-2").innerHTML=b2;
+        document.querySelector("#batch-3").innerHTML=b3;
+        document.querySelector("#batch-4").innerHTML=b4;
+        document.querySelector("#batch-5").innerHTML=b5;
+        }
+</script>
