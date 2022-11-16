@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce-2</title>
+    <style>
+        #add{
+            padding: 10px;
+            width: 160px;
+            background-color: orangered;
+            color: white;
+
+        }
+      a>button{
+             padding: 10px 20px 10px 20px;
+             border: none;
+             background-color: blue;
+             color: white;
+        }
+    </style>
+</head>
+<body>
+    <a href="products.html"><button>Product</button></a>
+    <form action="" id="foam">
+        <p>Product Name:</p>
+        <input type="text" name="" id="name" placeholder="Enter Product name">
+        <p>Category:</p>
+        <input type="text" name="" id="category" placeholder="Enter Category">
+        <p>Image:</p>
+        <input type="text" name="" id="image" placeholder="Enter url">
+        <p>Price:</p>
+        <input type="number" id="price" placeholder="Enter Price">
+        <p>Gender:</p>
+        <select name="" id="gender">
+            <option value="">gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <p>Sold:</p>
+        <select name="" id="sold">
+            <option  value="false">False</option>
+             <option value="true">True</option>
+        </select> <br><br><br>
+        <input type="submit" name="" id="add">
+    </form>
+</body>
+</html>
+<script>
+    function Constructor(name,cate,img,price,gender,sold){
+        this.name=name;
+        this.cate=cate;
+        this.img=img;
+        this.price=price;
+        this.gender=gender;
+        this.sold=sold;
+    }
+    var arr=JSON.parse(localStorage.getItem("job"))||[];
+    document.querySelector("#foam").addEventListener("submit",myFun);
+     function myFun(){
+            event.preventDefault();
+            
+          var name=document.querySelector("#name").value;
+         var cate=document.querySelector("#category").value;
+         var img=document.querySelector("#image").value;
+         var price=document.querySelector("#price").value;
+         
+         var gender=document.querySelector("#gender").value;
+         var sold=document.querySelector("#sold").value;
+    
+         var p= new Constructor(name,cate,img,price,gender,sold);
+
+         document.querySelector("#name").value=null;
+         document.querySelector("#category").value=null;
+         document.querySelector("#image").value=null;
+         document.querySelector("#price").value=null;
+         
+         document.querySelector("#gender").value="";
+         document.querySelector("#sold").value=false;
+          
+         arr.push(p);
+         console.log(arr)
+         localStorage.setItem("job",JSON.stringify(arr));
+
+     }
+</script>

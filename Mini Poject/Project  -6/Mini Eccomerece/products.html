@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <style>
+        #container{
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: auto;
+            gap: 30px;
+        }
+        #container>div{
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+        img{
+            width: 100%;
+            height: 250px;
+        }
+        .p1{
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+            
+        }
+        .p2{
+            font-size: 20px;
+            font-weight: bold;
+            color: orangered;
+            text-align: center;
+            margin-top: -10px;
+        }
+        .p3{
+            
+            font-weight: bold;
+            text-align: center;
+            margin-top: -10px;
+        }
+        .p4{
+            
+            font-weight: bold;
+            text-align: center;
+            margin-top: -10px;
+        }
+        .p5{
+            margin-left: 20px;
+            margin-bottom: 10px;
+            background-color:green;
+            color: white;
+            padding: 5px 10px 5px 10px;
+            border: none;
+        }
+        .btn{
+            padding: 5px 10px 5px 10px;
+            margin-left: 110px;
+            margin-bottom: 10px;
+            background-color: orangered;
+            color: white;
+            border: none;
+        }
+        #counter{
+            font-size: 40px;
+            color:black;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        a>button{
+            padding: 10px 20px 10px 20px;
+            background-color: blue;
+            color: white;
+            
+        }
+    </style>
+</head>
+<body>
+    <a href="admin.html"><button>Add more Product</button></a>
+    <div id="counter"></div>
+    <div id="container"></div>
+    
+</body>
+</html>
+<script>
+     var arr=JSON.parse(localStorage.getItem("job"));
+     var total= arr.reduce(function(sum,elem,index){
+         return sum +Number(elem.price);
+     },0);
+     var length=arr.length;
+    
+     document.querySelector("#counter").innerText=`you have ${length} items in cart and total is Rs${total}`
+      arr.map(function(elem,index){
+          var image=document.createElement("img");
+          var p1=document.createElement("p");
+          var p2=document.createElement("p");
+          var p3=document.createElement("p");
+          var p4=document.createElement("p");
+          var p5=document.createElement("button");
+          var div=document.createElement("div");
+          var btn=document.createElement("button")
+
+          p1.setAttribute("class","p1");
+          p2.setAttribute("class","p2");
+         p3.setAttribute("class","p3");
+          p4.setAttribute("class","p4");
+          p5.setAttribute("class","p5");
+          btn.setAttribute("class","btn")
+
+
+          image.src= elem.img;
+          p1.innerText= elem.name;
+          p2.innerText= elem.cate;
+          p3.innerText=elem.price;
+          p4.innerText=elem.gender;
+          p5.innerText=elem.sold;
+          p5.onclick = function() { myFun() };
+          btn.innerText="Remove";
+          btn.addEventListener("click",function(){
+              removeItem(elem,index);
+          })
+           
+          function myFun(){
+              if(p5.innerText=="false"){
+                  p5.innerText="true";
+                  p5.style.backgroundColor="red";
+              }else{
+                p5.innerText="false";
+                  p5.style.backgroundColor="green";
+              }
+          }
+          
+          div.append(image,p1,p2,p3,p4,p5,btn);
+
+          document.querySelector("#container").append(div)
+        })
+    
+        function removeItem(elem,index){
+            arr.splice(index,1);
+            localStorage.setItem("job",JSON.stringify(arr));
+            window.location.reload();
+            
+        }
+</script>
