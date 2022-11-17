@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin</title>
+    <style>
+        #navbar{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid black;
+            margin-bottom: 20px;
+            background-color: darkturquoise;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <a href="admin.html" style="color: black;">Home</a>
+        <a href="shoes.html">Shoes</a>
+        <a href="t-shirt.html">T-shirt</a>
+        <a href="tousers.html">Touser</a>
+        <a href="zeans.html">Zeans</a>
+
+    </div>
+    <form action="">
+        <input type="text" name="" id="image" placeholder="Image URL">
+        <input type="text" name="" id="price" placeholder="Enter price">
+        <select name="" id="category">
+            <option value="shirt">T-shirt</option>
+            <option value="touser">Touser</option>
+            <option value="zeans">Zeans</option>
+            <option value="shoes">Shoes</option>
+        </select>
+        <button id="submit">submit</button>
+    </form>
+</body>
+</html>
+<script>
+    function Product(image,price,cate){
+        this.image=image;
+        this.price=price;
+        this.cate=cate;
+    }
+    let data=JSON.parse(localStorage.getItem("products"))||[]
+   let myFun=()=>{
+       let image=document.getElementById("image").value
+       let price=document.getElementById("price").value
+       let cate=document.getElementById("category").value
+        let p=new Product(image,price,cate);
+        data.push(p);
+        localStorage.setItem("products",JSON.stringify(data));
+        document.getElementById("image").value=null;
+        document.getElementById("price").value=null;
+   }
+   document.querySelector("form").addEventListener("submit",myFun)
+</script>
