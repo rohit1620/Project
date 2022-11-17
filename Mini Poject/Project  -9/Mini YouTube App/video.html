@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>video</title>
+   <style>
+    #cont{
+        width: 100%;
+        height: 550px;
+          margin-top: 30px;
+    }
+    .iframe{
+        width: 100%;
+        height: 100%;
+    }
+   </style>
+</head>
+<body>
+    <a href="index.html" style="font-size:40px">home page</a>
+    <div id="cont"></div>
+</body>
+</html>
+<script>
+    let vid= JSON.parse(localStorage.getItem("video"));
+    console.log(vid)
+
+    let iframe= document.createElement("iframe");
+    iframe.src=`https://www.youtube.com/embed/${vid.videoId}`;
+
+    
+    iframe.setAttribute("class","iframe")
+    document.getElementById("cont").append(iframe)
+</script>

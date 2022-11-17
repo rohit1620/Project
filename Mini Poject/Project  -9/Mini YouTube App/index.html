@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myYouTube</title>
+    <style>
+        #contain{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: auto;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        #btn{
+            height: 60px;
+            width: 150px;
+            background-color: red;
+            color: white;
+            font-size: 25px;
+            margin-left: 300px;
+            border: none;
+        }
+        img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    
+    <button id="btn">myYouTube</button>
+    <input type="text" name="" id="query">
+    <button onclick="search()">search</button>
+    <div id="contain"></div>
+</body>
+</html>
+<script>
+      
+let titile=JSON.parse(localStorage.getItem("title"))
+   let api_key="AIzaSyBJOP_SWdYFIkJgZ1PvQOY4YqhUqkPG1Ug";
+    let search= async()=>{
+        try {
+           let query = document.getElementById("query").value||titile;
+           localStorage.setItem("title",JSON.stringify(query))
+           let url= `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&key=${api_key}`;
+           document.getElementById("query").value=null;
+           let res= await fetch(url);
+           let data= await res.json();
+           append(data.items);
+           console.log(data.items)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+   search()
+    // Append data
+
+    let append= (data)=>{
+        document.getElementById("contain").innerHTML=null;
+        let container= document.getElementById("contain");
+        data.forEach(({id:{videoId},snippet:{title,thumbnails}})=>{
+                   let div =document.createElement("div");
+                   let iframe= document.createElement("img");
+                   iframe.src=thumbnails.default.url;
+
+                   let h3=document.createElement("h4");
+                   h3.innerText=title;
+
+                   div.append(iframe,h3);
+
+                  
+                   var video= {
+                       videoId,
+                       title,
+                   }
+                   div.onclick=()=>{
+                       playVideo(video);
+                   };
+                // div.addEventListener("click",function(){
+                //     playVideo(video);
+                // })
+                   container.append(div);
+        });
+    }
+    function playVideo(video){
+        localStorage.setItem("video",JSON.stringify(video));
+        console.log("rohit kumar")
+          window.location.href="video.html";
+    }
+</script>
