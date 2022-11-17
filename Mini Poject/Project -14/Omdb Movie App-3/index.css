@@ -1,0 +1,70 @@
+*{background-color: black;color: white;}
+#header{
+    position: sticky;
+    top: 0px;
+}
+#head-logo-section>div>h1{
+    border: 2px solid ;
+    width: fit-content;
+    margin-left: 15%;
+    color: gold;
+    border-radius: 10px;
+    border-color: rgb(46, 45, 42);
+}
+sup{
+    background-color: gold;
+    border: 2px;
+    border-radius: 10px;
+}
+#head-logo-section>div>sup,span{
+    color: rgb(255, 0, 0);
+    /* border: 2px solid gold ; */
+    /* background-color: gold; */
+    /* border-radius: 20px; */
+}
+.Search-section{
+    border: 2px solid red;
+    color: white;
+    display: flex;
+    justify-content: center;
+
+}
+.search{
+    position: sticky;
+    top: 50px;
+}
+.search>div{
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#seacrh-box{
+    height: 30px;
+    width: 50%;
+    border: 1px solid gold ;
+    border-radius: 5px;
+}
+#button{
+    cursor: pointer;
+}
+.search-list-data{
+    border: 2px solid red;
+    display:flex ;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+#display{
+    margin-top: 10px;
+    width: 80%;
+    margin:20px auto;
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content:center;
+    gap: 20px;
+}
+#notfound{
+    text-align: center;
+}
+
